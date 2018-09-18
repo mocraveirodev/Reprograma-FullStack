@@ -1,0 +1,17 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+header{
+	width: 100%;
+	height: 50px;
+	background: #0c1f9e;
+	color: #ffffff;
+	text-align: center;
+}
+
+footer{
+
+	background: #f6f6f6;
+	color: #cbcee6;
+}
