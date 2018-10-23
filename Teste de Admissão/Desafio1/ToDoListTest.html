@@ -1,0 +1,141 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style> /*aqui começa a folha de estilo CSS*/
+body {
+  margin: 0;
+  min-width: 250px;
+}
+
+/* Include the padding and border in an element's total width and height */
+* {
+  box-sizing: border-box;
+}
+
+/* Pra remover margins and padding*/
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Lista de itens */
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: white;
+  font-size: 20px;
+  transition: 0.2s;
+}
+
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+  background: #888;
+  color: #FFFAFA;
+  text-decoration: line-through;
+}
+
+/* Estilo do topo da Lista de Tarefas. Quero roxo.*/
+.header {
+  background-color:#9400D3;
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+}
+
+/* Distância entre o box roxo e o início da lista de tarefas */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Alinhando a caixa em que o texto vai ser inserido e o botão de Adicionar */
+input {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+/* Como tem que ficar o botão de adicionar */
+.botaoAdd {
+  padding: 10px;
+  width: 25%;
+  background: #d9d9d9; /*aqui fica a cor do fundo*/
+  color: #555; /*aqui ficar a cor da fonte*/
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.botaoAdd:hover {
+  background-color: #bbb; /*essa é a cor do botão ao clicar ou passar o mouse em cima*/
+}
+</style>
+</head>
+<body>
+
+<div id="myDIV" class="header">
+  <h1 style="margin:5px">Lista de Tarefas</h1>
+  <input type="text" id="myInput">
+  <span onclick="newElement()" class="botaoAdd">Adicionar</span>
+</div>
+
+<ul id="myUL">
+  <li>Ler os jornais do dia</li>
+  <li>Levar o cachorro para passear</li>
+  <li>Ir ao supermercado</li>
+</ul>
+
+<script> /*aqui começa javascript**/
+
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+// Create a new list item when clicking on the "Adicionar" button
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+
+    //falta uma tratativa aqui para quando o input estiver vazio
+
+  } else {
+    // document.getElementById("myUL").appendChild(li);  **Só comentei a linha q vc tinha escrito pra não perder
+    var lista = document.getElementById("myUL");
+    lista.insertBefore(li,lista.childNodes[0]);
+  }
+  document.getElementById("myInput").value = "";
+
+//vi que esse cogido nao tava impedindo nada dai comentei e funcionou kkkk
+
+  // var span = document.createElement("SPAN");
+  // span.appendChild(txt);
+  // li.appendChild(span);
+
+  // for (i = 0; i < close.length; i++) {
+  //   close[i].onclick = function() {
+  //     var div = this.parentElement;
+  //     div.style.display = "none";
+  //   }
+  // }
+}
+</script>
+
+</body>
+</html>
