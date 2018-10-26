@@ -8,7 +8,7 @@ import './Login.css'
 function Login() {
     return (
         <main className="login">
-            <h1>Conta</h1>
+            <h1>Login</h1>
             <p>Entre com seu email e senha.</p>
 
             <Legenda htmlFor="email">E-mail:</Legenda>
