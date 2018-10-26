@@ -12,7 +12,7 @@ function Conta() {
             <p>Envie o formulário para criar uma conta!</p>
 
             <Legenda htmlFor="nome">Nome:</Legenda>
-            <Campo type="text" name="nome" id="nome" placeholder="Nome" />
+            <Campo type="text" name="nome" id="nome" placeholder="Nome" obrigatorio />
 
             <Legenda htmlFor="telefone">Telefone:</Legenda>
             <Campo type="tel" name="telefone" id="telefone" placeholder="Telefone" />

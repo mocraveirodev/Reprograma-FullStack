@@ -19,9 +19,26 @@ class Campo extends React.Component {
         }
     }
 
+    // this.valida = this.valida.bind(this);
+
+    valida = evento => {
+        const alvo = evento.target;
+
+        if(this.props.obrigatorio && alvo.value.trim() === ''){
+            const state = {
+                erro: 'Campo obrigatório'
+            }
+
+            this.setState(state);
+        }
+    }
+
     render() {
         return(
-            <input type={this.props.type} className="caixa-texto" name={this.props.name} id={this.props.id} placeholder={this.props.placeholder} />
+            <div>
+                <input type={this.props.type} className="caixa-texto" name={this.props.name} id={this.props.id} placeholder={this.props.placeholder} onChange={this.valida} />
+                <p className="grupo__erro">{this.state.erro}</p>
+            </div>
         )
     }
 }
