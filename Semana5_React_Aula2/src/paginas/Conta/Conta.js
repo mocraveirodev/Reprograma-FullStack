@@ -12,17 +12,17 @@ function Conta() {
             <p>Envie o formulário para criar uma conta!</p>
 
             <Legenda htmlFor="nome">Nome:</Legenda>
-            <Campo type="text" name="nome" id="nome" placeholder="Nome" obrigatorio />
+            <Campo type="text" name="nome" id="nome" placeholder="Nome" obrigatorio minLength={10} />
 
             <Legenda htmlFor="telefone">Telefone:</Legenda>
-            <Campo type="tel" name="telefone" id="telefone" placeholder="Telefone" />
+            <Campo type="tel" name="telefone" id="telefone" placeholder="Telefone" obrigatorio />
 
             <Legenda htmlFor="email">E-mail:</Legenda>
-            <Campo type="email" name="email" id="email" placeholder="E-mail" />
+            <Campo type="email" name="email" id="email" placeholder="E-mail" obrigatorio pattern={/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/} />
 
 
             <Legenda htmlFor="senha">Senha:</Legenda>
-            <Campo type="password" name="senha" id="senha" placeholder="Senha" />
+            <Campo type="password" name="senha" id="senha" placeholder="Senha" obrigatorio minLength={6}/>
 
             <Botao desabilitado>Enviar</Botao>
             <Link url="/login">Fazer Login</Link>
