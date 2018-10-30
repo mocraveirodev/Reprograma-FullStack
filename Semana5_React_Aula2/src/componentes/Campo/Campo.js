@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './Campo.css'
 
 /*
@@ -11,34 +11,45 @@ import './Campo.css'
 //     )
 // }
 
-class Campo extends React.Component {
+class Campo extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            modificado: false,
             erro: ''
         }
     }
 
     // this.valida = this.valida.bind(this);
 
+    temErro(){
+        return (!this.state.modificado || this.state.erro) ? true : false; //forma de fazer if-else na mesma linha
+    }
+
     valida = evento => {
         const alvo = evento.target;
+        const { value, type } = alvo
+        const { obrigatorio, minLength } = this.props
+        const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        let msg = ''
 
-        if(this.props.obrigatorio && alvo.value.trim() === ''){
-            this.setState({ erro: 'Campo obrigatório' })
-        }else if(this.props.minLength && alvo.value.length < this.props.minLength){
-            this.setState({ erro: `Digite pelo menos ${this.props.minLength} caracteres.` })
-        }else if(this.props.pattern && !this.props.pattern.test(alvo.value)){
-            this.setState({ erro: 'Valor inválido' })
-        }else{
-            this.setState({ erro: '' })
+        if(obrigatorio && value.trim() === ''){
+            msg = 'Campo obrigatório'
+        }else if(minLength && value.length < minLength){
+            msg = `Digite pelo menos ${minLength} caracteres.`
+        }else if(type === 'email' && !regex.test(value)){
+            msg = 'Valor inválido'
         }
+
+        this.setState({ modificado: true, erro: msg }, this.props.onChange) //dessa forma ele obriga a chamar o onchange logo apos setar o erro
+
     }
 
     render() {
+
         return(
             <div>
-                <input type={this.props.type} className="caixa-texto" onBlur={this.valida} name={this.props.name} id={this.props.id} placeholder={this.props.placeholder} onChange={this.valida} />
+                <input type={this.props.type} className="caixa-texto" name={this.props.name} id={this.props.id} placeholder={this.props.placeholder} onBlur={this.valida} onChange={this.valida} />
                 <p className="grupo__erro">{this.state.erro}</p>
             </div>
         )

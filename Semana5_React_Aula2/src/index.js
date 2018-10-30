@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-// import Login from './paginas/Login/Login';
-import Conta from './paginas/Conta/Conta';
+import Login from './paginas/Login/Login';
+// import Conta from './paginas/Conta/Conta';
 
 const divProjeto = document.getElementById('projeto');
-ReactDOM.render(<Conta />, divProjeto);
+ReactDOM.render(<Login />, divProjeto);
 
 // const linkCriarUmaConta = React.createElement('a',{
 //     className: 'link',
