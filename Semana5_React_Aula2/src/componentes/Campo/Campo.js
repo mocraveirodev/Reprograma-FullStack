@@ -22,11 +22,11 @@ class Campo extends Component {
 
     // this.valida = this.valida.bind(this);
 
-    temErro(){
+    temErro = () => {
         return (!this.state.modificado || this.state.erro) ? true : false; //forma de fazer if-else na mesma linha
     }
 
-    valida = evento => {
+    valida = (evento) => {
         const alvo = evento.target;
         const { value, type } = alvo
         const { obrigatorio, minLength } = this.props

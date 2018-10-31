@@ -1,11 +1,32 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Login from './paginas/Login/Login';
-// import Conta from './paginas/Conta/Conta';
+import Conta from './paginas/Conta/Conta';
+import QuemSomos from './paginas/QuemSomos/QuemSomos';
+import Contato from './paginas/Contato/Contato';
+import './index.css'
 
-const divProjeto = document.getElementById('projeto');
-ReactDOM.render(<Login />, divProjeto);
+function App(){
+    return (
+        <div className="app">
+            {/*<Navbar />*/}
+            <Switch>
+                <Route path='/' exact component={Login}/>
+                <Route path='/login' component={Login}/>
+                <Route path='/conta' component={Conta}/>
+                <Route path='/quemsomos' component={QuemSomos}/>
+                <Route path='/contato' component={Contato}/>
+            </Switch>
+        </div>
+    )
+}
+
+// const divProjeto = document.getElementById('projeto');
+ReactDOM.render(
+<BrowserRouter>
+    <App />
+</BrowserRouter>, document.getElementById('projeto'));
 
 // const linkCriarUmaConta = React.createElement('a',{
 //     className: 'link',
