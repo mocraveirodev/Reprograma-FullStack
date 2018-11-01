@@ -14,10 +14,15 @@ import './Campo.css'
 class Campo extends Component {
     constructor(props) {
         super(props)
+        this.valor = ''
         this.state = {
             modificado: false,
             erro: ''
         }
+    }
+
+    getValor = () => {
+        return this.valor;
     }
 
     // this.valida = this.valida.bind(this);
@@ -43,6 +48,7 @@ class Campo extends Component {
 
         this.setState({ modificado: true, erro: msg }, this.props.onChange) //dessa forma ele obriga a chamar o onchange logo apos setar o erro
 
+        this.valor = value
     }
 
     render() {
