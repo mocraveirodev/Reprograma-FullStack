@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+import { deslogaUsuario } from '../../redux/actions'
 import Menu from '../Menu/Menu'
 import logo from './logo.png'
 import './Navbar.css'
@@ -17,30 +18,34 @@ function Navbar(props) {
     )
 }
 
-function passaNoPropsDadosDoEstado(state) {
-    return {
-        usuario: state.usuario
-    }
-}
+export default withRouter(connect((state) => ({ usuario: state.usuario }), { deslogaUsuario })(Navbar))
 
-function passaNoPropsDisparadoresDeAcao(dispatch) {
-    return {
-        deslogaUsuario: () => {
-            // const acao = {
-            //     type: 'DESLOGA_USUARIO'
-            // }
+// (state) => ({ usuario: state.usuario })
+// function passaNoPropsDadosDoEstado(state) {
+//     return {
+//         usuario: state.usuario
+//     }
+// }
 
-            // dispatch(acao)
+// function passaNoPropsDisparadoresDeAcao(dispatch) {
+//     return {
+//         deslogaUsuario: () => {
+//             // const acao = {
+//             //     type: 'DESLOGA_USUARIO'
+//             // }
 
-            dispatch({
-                type: 'DESLOGA_USUARIO'
-            })
-        }
-    }
-}
+//             // dispatch(acao)
 
-const conectaNaStore = connect(passaNoPropsDadosDoEstado, passaNoPropsDisparadoresDeAcao)
+//             dispatch({
+//                 type: 'DESLOGA_USUARIO'
+//             })
+//         }
+//     }
+// }
 
-const NavbarConectada = conectaNaStore(Navbar)
+// const conectaNaStore = connect((state) => ({ usuario: state.usuario }), { deslogaUsuario })
 
-export default withRouter(NavbarConectada)
+// const NavbarConectada = conectaNaStore(Navbar)
+// const NavbarConectada = connect((state) => ({ usuario: state.usuario }), { deslogaUsuario })(Navbar)
+
+// export default withRouter(NavbarConectada)

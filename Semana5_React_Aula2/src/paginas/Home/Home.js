@@ -15,15 +15,19 @@ function Home(props) {
         </main>
     )
 }
+export default connect((state) => ({ usuario: state.usuario }))(Home)
 
-function passaDadosDoEstadoParaMeuComponente(state){
-    return {
-        usuario: state.usuario
-    }
-}
 
-const conectaNaStore = connect(passaDadosDoEstadoParaMeuComponente)
+// function passaDadosDoEstadoParaMeuComponente(state){
+//     return {
+//         usuario: state.usuario
+//     }
+// }
+// (state) => ({ usuario: state.usuario })
 
-const HomeConectada = conectaNaStore(Home)
+// const conectaNaStore = connect((state) => ({ usuario: state.usuario }))
 
-export default HomeConectada
+// const HomeConectada = conectaNaStore(Home)
+// const HomeConectada = connect((state) => ({ usuario: state.usuario }))(Home)
+
+// export default HomeConectada
