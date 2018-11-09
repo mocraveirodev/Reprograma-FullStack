@@ -15,7 +15,7 @@ function usuario(state = usuarioInicial, action) {
             const json = JSON.stringify(usuarioLogado)
             localStorage.setItem('usuario', json)
 
-            return  usuarioLogado
+            return usuarioLogado
         case 'DESLOGA_USUARIO':
             localStorage.removeItem('usuario')
             const usuarioDeslogado = null
@@ -25,8 +25,12 @@ function usuario(state = usuarioInicial, action) {
     }
 }
 
-function postits (postitsAtuais = [], action) {
+function postits(postitsAtuais = [], action) {
     switch (action.type) {
+        case 'CADASTRA_POSTIT':
+            return postitsAtuais.concat(action.dados)
+        case 'ALTERA_POSTIT':
+            return postitsAtuais.map(postit => postit.id === action.dados.id ? action.dados : postit)
         default:
             return postitsAtuais
     }

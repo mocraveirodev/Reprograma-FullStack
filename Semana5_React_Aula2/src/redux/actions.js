@@ -32,3 +32,17 @@ export function deslogaUsuario() {
     //     }
     // }
 }
+
+export function cadastraPostit(dados) {
+    return {
+        type: 'CADASTRA_POSTIT',
+        dados
+    }
+}
+
+export function alteraPostit(dados){
+    return {
+        type: 'ALTERA_POSTIT',
+        dados
+    }
+}
