@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { cadastraPostit, alteraPostit, removePostit } from '../../redux/actions'
 import { connect } from 'react-redux'
-import { cadastraPostit, alteraPostit } from '../../redux/actions'
+import { MdDelete } from 'react-icons/md'
 import './Postit.css'
 
 class Postit extends Component {
@@ -18,7 +19,6 @@ class Postit extends Component {
 
         if (cadastrando) {
             const dados = {
-                id: `77f288c6-aa8f-429a-8112-c845c8d56fa${Math.random(100)}`,
                 titulo: form.titulo.value,
                 texto: form.texto.value
             }
@@ -44,11 +44,20 @@ class Postit extends Component {
         this.setState({ editando: true })
     }
 
+    removePostit = (ev) => {
+        ev.stopPropagation();
+
+        this.props.removePostit(this.props.id) //não é a mesma função pois esta trazendo do props
+    }
+
     render() {
         const cadastrando = !this.props.id
 
         return (
             <form className='postit' onClick={this.habilitaEdicao} onSubmit={this.cadastraOuAltera}>
+                {!cadastrando && this.state.editando && (
+                    <button type='button' className='postit__botao-remover' onClick={this.removePostit}><MdDelete /></button>
+                )}
                 <input type='text' name='titulo' className='postit__titulo' placeholder='Título' autoComplete='off' defaultValue={this.props.titulo} />
                 <textarea className='postit__texto' name='texto' placeholder='Digite um Texto...' autoComplete='off' rows={5} defaultValue={this.props.texto} />
                 {(cadastrando || this.state.editando) && (
@@ -58,4 +67,4 @@ class Postit extends Component {
     }
 }
 
-export default connect(null, { cadastraPostit, alteraPostit })(Postit)
+export default connect(null, { cadastraPostit, alteraPostit, removePostit })(Postit)

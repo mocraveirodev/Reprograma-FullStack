@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { logaUsuario } from '../../redux/actions'
 import Link from '../../componentes/Link/Link';
 import Botao from '../../componentes/Botao/Botao';
@@ -29,7 +30,7 @@ class Login extends Component {
 
         this.props.logaUsuario(dados)
 
-        this.props.history.push('/')
+        // this.props.history.push('/')
     }
 
     handleChange = () => {
@@ -37,12 +38,15 @@ class Login extends Component {
         const campoSenha = this.senhaRef.current
         if (campoEmail.temErro() || campoSenha.temErro()) {
             this.setState({ desabilitado: true })
-        }else{
+        } else {
             this.setState({ desabilitado: false })
         }
     }
 
     render() {
+        if (this.props.usuario) {
+            return <Redirect to='/' />
+        }
         return (
             <main className="login">
                 <h1>Login</h1>
@@ -51,10 +55,10 @@ class Login extends Component {
                 <form onSubmit={this.enviaDados}>
                     <Legenda htmlFor="email">E-mail:</Legenda>
                     <Campo ref={this.emailRef} type="email" name="email" id="email" placeholder="E-mail" obrigatorio onChange={this.handleChange} />
-            
+
                     <Legenda htmlFor="senha">Senha:</Legenda>
-                    <Campo ref={this.senhaRef} type="password" name="senha" id="senha" placeholder="Senha"  obrigatorio minLength={6} onChange={this.handleChange} />
-            
+                    <Campo ref={this.senhaRef} type="password" name="senha" id="senha" placeholder="Senha" obrigatorio minLength={6} onChange={this.handleChange} />
+
                     <Botao desabilitado={this.state.desabilitado}>Enviar</Botao>
                     <Link url="/conta">Criar uma conta</Link>
                 </form>
@@ -63,7 +67,7 @@ class Login extends Component {
     }
 }
 
-export default connect(null, {logaUsuario})(Login)
+export default connect((state) => ({ usuario: state.usuario }), { logaUsuario })(Login)
 
 // function Login() {
 //     return (

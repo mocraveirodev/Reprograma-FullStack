@@ -31,6 +31,8 @@ function postits(postitsAtuais = [], action) {
             return postitsAtuais.concat(action.dados)
         case 'ALTERA_POSTIT':
             return postitsAtuais.map(postit => postit.id === action.dados.id ? action.dados : postit)
+        case 'REMOVE_POSTIT':
+            return postitsAtuais.filter(postit => postit.id !== action.id)
         default:
             return postitsAtuais
     }
