@@ -1,0 +1,11 @@
+{
+  "name": "biscoidash",
+  "version": "1.0.0",
+  "description": "Criando meu primeiro modulo do npm",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Monica Craveiro",
+  "license": "ISC"
+}
