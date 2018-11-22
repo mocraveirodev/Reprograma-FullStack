@@ -7,11 +7,34 @@ function getProducts() {
   return data["items"];
 }
 
-function showProducts() {
+const btnSubmit = document.getElementById("btn-submit");
 
-  // let nome = "Ju"
-  // console.log(`meu nome é ${nome}`)
-  // console.log("meu nome é " + nome)
+btnSubmit.addEventListener("click", function(e){
+  e.preventDefault();
+
+  let inputProdutoNome = document.getElementById("produto-nome").value;
+  let inputProdutoPreco = document.getElementById("produto-preco").value;
+  let inputProdutoFoto = document.getElementById("produto-foto").value;
+
+  let novoItem = {
+    "product": {
+      "name": "",
+      "images": [],
+      "price": {
+        "value": 0,
+      },
+    },
+  };
+
+  novoItem["product"]["name"] = inputProdutoNome;
+  novoItem["product"]["price"]["value"] = inputProdutoPreco;
+  novoItem["product"]["images"].push(inputProdutoFoto);
+
+  data["items"].push(novoItem);
+  showProducts();
+});
+
+function showProducts(){
 
   // for (produto of getProducts()){
   //   let productDiv = document.getElementById("products");
@@ -25,8 +48,6 @@ function showProducts() {
   //   + "</p>" + "</div>" + "</div>"
   // }
 
-  //`template string`
-
   let productDiv = document.getElementById("products");
   productDiv.innerHTML = `
     ${getProducts().map((produto) => `
@@ -36,40 +57,12 @@ function showProducts() {
           <h3 class="product-name">${produto["product"]["name"]}</h3>
         </div>
         <div class="text-price">
-          <p class="product-price">${Number(produto["product"]["price"]["value"]).toLocaleString('pt-br', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })}</p>
+          <p class="product-price">${Number(produto["product"]["price"]["value"]).toLocaleString('pt-br', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })}</p>
         </div>
       </div>
       `).join("")}
   `
-}
-document.querySelector
-
-document.getElementById('button').addEventListener('click', function (ev) {
-  ev.preventDefault();
-  // let nomeProd = document.getElementById('nomeProd').value;
-  // let precoProd = document.getElementById('precoProd').value;
-  // let imagemProd = document.getElementById('imagemProd').value;
-  // let imgArray = [document.getElementById('imagemProd').value];
-  // let itemObj = {
-  //   "product": {
-  //     "name": document.getElementById('nomeProd').value,
-  //     "images": [document.getElementById('imagemProd').value],
-  //     "price": {
-  //       "value": document.getElementById('precoProd').value
-  //     }
-  //   }
-  // }
-  data["items"].push({
-    "product": {
-      "name": document.getElementById('nomeProd').value,
-      "images": [document.getElementById('imagemProd').value],
-      "price": {
-        "value": document.getElementById('precoProd').value
-      }
-    }
-  });
-  showProducts();
-});
+  }
 
 
 
