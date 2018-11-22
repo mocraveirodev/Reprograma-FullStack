@@ -15,6 +15,12 @@ app.get('/api/users/:id', (req, res) => {
     res.send(foundUser);
 });
 app.post('/api/users', (req, res) => {
+    const id = Math.max(...users.map(user => user.id)) + ;
+    const newUser = {
+        id,
+        nome: req.body.nome,
+        email: req.body.email
+    }
     const schema = {
         nome: Joi.string().min(3).required(),
         email: Joi.string().min(3).required()
@@ -26,11 +32,6 @@ app.post('/api/users', (req, res) => {
         return res.status(400).send(validation.error.details[0].message);
     }
 
-    const newUser = {
-        id: users.length + 1,
-        nome: req.body.nome,
-        email: req.body.email
-    }
     users.push(newUser);
     res.send(newUser);
 });
