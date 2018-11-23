@@ -15,7 +15,7 @@ app.get('/api/users/:id', (req, res) => {
     res.send(foundUser);
 });
 app.post('/api/users', (req, res) => {
-    const id = Math.max(...users.map(user => user.id)) + ;
+    const id = Math.max(...users.map(user => user.id)) + 1;
     const newUser = {
         id,
         nome: req.body.nome,
@@ -46,12 +46,13 @@ app.put('/api/users/:id', (req, res) => {
 
     const validation = Joi.validate(req.body, schema);
 
-    if (!foundUser) {
-        return res.status(404).send('Deu merda!');
-    }
 
     if (validation.error) {
         return res.status(400).send(validation.error.details[0].message);
+    }
+    
+    if (!foundUser) {
+        return res.status(404).send('Deu merda!');
     }
 
 
@@ -71,7 +72,7 @@ app.delete('/api/users/:id', (req, res) => {
     if (!foundUser) {
         return res.status(404).send('Não encontrado!');
     }
-    users.splice(users.indexOf(foundUser));
+    users.splice(users.indexOf(foundUser), 1);
     res.send(foundUser);
 });
 
